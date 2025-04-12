@@ -23,3 +23,4 @@ rootProject.name = "MyLectureE"
 include(":app")
 include(":eweek04a")
 include(":eweek05a")
+include(":week5homework")

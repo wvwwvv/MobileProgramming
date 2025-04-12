@@ -1,4 +1,4 @@
-package com.example.eweek05a
+package com.example.week5homework
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.eweek05a.ui.theme.MyLectureETheme
-import com.example.eweek05a.uicomponents.MainScreen
+import com.example.week5homework.ui.theme.MyLectureETheme
+import com.example.week5homework.uicomponents.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyLectureETheme {
-                MainScreen()
+               MainScreen()
             }
         }
     }

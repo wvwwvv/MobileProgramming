@@ -1,4 +1,3 @@
-/*
 package com.example.eweek05a.uicomponents
 
 import android.os.Parcelable
@@ -18,6 +17,7 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import kotlinx.parcelize.Parcelize
 
+//interface 구현 필요 없이 직렬화 기능 사용 가능
 @Parcelize
 data class City(val name: String, val country: String) : Parcelable
 
@@ -29,6 +29,7 @@ fun CityScreen(modifier: Modifier = Modifier) {
     Text("${selectedCity.name} ${selectedCity.country}")
 }
 
+//직렬화기능이 없으므로 saver 만들어주는 내용 필요
 data class City2(val name: String, val country: String) {
     companion object {
         val nameKey = "Name"
@@ -48,6 +49,7 @@ data class City2(val name: String, val country: String) {
             }
         )
 
+        //우리가 원하는 형태의 자료구조 사용
         val citySaver = Saver<City2, Any>(
             save = {
                 listOf(it.name, it.country)
@@ -93,6 +95,7 @@ fun CityScreen4(modifier: Modifier = Modifier) {
     Text("${selectedCity.name}\t${selectedCity.country}")
 }
 
+// list 안에 list 구조 피하기 위해 flatMap 사용 name, country, name ,,, 으로 저장 -> 2개씩 묶는 작업 필요
 @Composable
 fun CityScreen5(modifier: Modifier = Modifier) {
     val cityListSaver = listSaver<SnapshotStateList<City2>, Any>(
@@ -105,6 +108,7 @@ fun CityScreen5(modifier: Modifier = Modifier) {
         },
         restore = { flat ->
             flat.chunked(2).map { (name, country) ->
+                //2개씩 끊어서 city2
                 City2(
                     name as String, country as String
                 )
@@ -133,10 +137,11 @@ fun CityScreen6(modifier: Modifier = Modifier) {
                 "countries" to list.map { it.country }
             )
         },
+        //key에 대응되는 값을 리스트로
         restore = { map ->
             val names = map["names"] as List<String>
             val countries = map["countries"] as List<String>
-            names.zip(countries)
+            names.zip(countries) //2개를 묶는 함수 zip
                 .map { (name, country) -> City2(name, country) }
                 .toMutableStateList()
         }
@@ -154,4 +159,4 @@ fun CityScreen6(modifier: Modifier = Modifier) {
         }
     }
 
-}*/
+}
